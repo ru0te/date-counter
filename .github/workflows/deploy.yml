@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: '18'
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: npm ci --silent
       - name: Build
         run: npm run build
       - name: Upload Pages artifact
