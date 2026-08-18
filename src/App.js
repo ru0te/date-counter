@@ -1,9 +1,30 @@
+import { useState } from 'react';
+
 function App() {
-  const today = new Date();
-  const weekDay = today.toLocaleDateString('en-US', { weekday: 'short' });
-  const month = today.toLocaleDateString('default', { month: 'short' });
-  const day = today.getDate();
-  const year = today.getFullYear();
+  const count = 1;
+  const [date, setDate] = useState(new Date());
+
+  const weekDay = date.toLocaleDateString('en-US', { weekday: 'short' });
+  const month = date.toLocaleDateString('default', { month: 'short' });
+  const day = date.getDate();
+  const year = date.getFullYear();
+
+  const handleCountUp = () => {
+    setDate((d) => {
+      const newDate = new Date(d); // create new date based on current date in the state
+      newDate.setDate(date.getDate() + count); // call setDate on the new Date and then use getDate function on it and add count
+      return newDate;
+    });
+  };
+
+  const handleCountDown = () => {
+    setDate((d) => {
+      const newDate = new Date(d);
+      newDate.setDate(date.getDate() - count);
+      return newDate;
+    });
+  };
+
   return (
     <>
       <div className='container'>
@@ -14,17 +35,9 @@ function App() {
           <p>{year}</p>
         </div>
 
-        <div className='controls'>
-          <div className='control'>
-            <button>-</button>
-            <p>Step:</p>
-            <button>+</button>
-          </div>
-          <div className='control'>
-            <button>-</button>
-            <p>Count:</p>
-            <button>+</button>
-          </div>
+        <div className='control'>
+          <button onClick={handleCountDown}>count down</button>
+          <button onClick={handleCountUp}>count up</button>
         </div>
       </div>
     </>
